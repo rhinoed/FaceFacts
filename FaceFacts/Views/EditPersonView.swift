@@ -6,12 +6,19 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct EditPersonView: View {
+    @Environment(\.modelContext) var modelContext
+    @Binding var navigationPath: NavigationPath
     @Bindable var person: Person
+    @Query(sort: [
+        SortDescriptor(\Event.name),
+        SortDescriptor(\Event.location)
+    ]) var events: [Event]
+                  
     var body: some View {
         Form{
-            #if os(iOS)
             Section{
                 TextField("Name", text: $person.name)
                     .textContentType(.name)
@@ -20,23 +27,35 @@ struct EditPersonView: View {
                     .textInputAutocapitalization(.never)
             }
             Section{
-                TextField("Details about this person", text: $person.details, axis: .vertical )
+                Picker("Met At", selection: $person.event){
+                    Text("Unknown Event")
+                        .tag(Optional<Event>.none)
+                    if events.isEmpty == false{
+                        Divider()
+                        ForEach(events){ event in
+                            Text(event.name)
+                                .tag(Optional(event))
+                        }
+                    }
+                }
+                Button("Add a new event", action: addEvent)
+            }
+            Section{
+                TextField("Notes", text: $person.details, axis: .vertical )
                 
             }
-            #endif
-            #if os(macOS)
-            TextField("Name", text: $person.name)
-                .textContentType(.name)
-            TextField("Email Address", text: $person.emailAddress)
-                .textContentType(.emailAddress)
-                
-            TextField("Details about this person", text: $person.details, axis: .vertical )
             
-            #endif
-            
+            }
+            .navigationBarTitle("Edit Person").navigationTitle("Edit Person")
+            .navigationBarTitleDisplayMode(.inline)
+            .navigationDestination(for: Event.self) { event in
+                EditEventView(event: event)
         }
-        
-        
+    }
+    func addEvent(){
+        let event = Event(name: "", location: "")
+        modelContext.insert(event)
+        navigationPath.append(event)
     }
 }
 
