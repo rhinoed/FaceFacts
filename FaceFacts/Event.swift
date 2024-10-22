@@ -10,12 +10,12 @@ import SwiftData
 
 @Model
 class Event{
-    var title: String
+    var name: String
     var location: String
     var date: Date?
     
-    init(title: String, location: String, date: Date? = nil) {
-        self.title = title
+    init(name: String, location: String, date: Date? = nil) {
+        self.name = name
         self.location = location
         self.date = date
     }
