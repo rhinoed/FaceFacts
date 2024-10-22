@@ -1,8 +1,10 @@
-// Event.swift
+//
+//  Event.swift
+//  FaceFacts
+//
+//  Created by Mark Edmunds on 10/22/24.
+//
 
-// Mark Edmunds
-
-//10-18-24
 import Foundation
 import SwiftData
 

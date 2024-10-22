@@ -14,6 +14,7 @@ class Person{
     var name: String
     var emailAddress: String
     var details: String
+    var event: Event?
     
     init(name: String, emainAddress: String, details: String) {
         self.name = name
