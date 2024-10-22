@@ -16,9 +16,10 @@ class Person{
     var details: String
     var event: Event?
     
-    init(name: String, emainAddress: String, details: String) {
+    init(name: String, emainAddress: String, details: String, event: Event? = nil) {
         self.name = name
         self.emailAddress = emainAddress
         self.details = details
+        self.event = event
     }
 }
