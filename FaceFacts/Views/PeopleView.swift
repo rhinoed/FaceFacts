@@ -9,7 +9,7 @@ import SwiftUI
 import SwiftData
 
 struct PeopleView: View {
-    @Environment (\.modelContext) var  modelContex
+    @Environment(\.modelContext) var  modelContex
     @Query var people: [Person]
     var body: some View {
         List{

@@ -9,7 +9,7 @@ import SwiftUI
 import SwiftData
 
 struct ContentView: View {
-    @Environment (\.modelContext) var  modelContex
+    @Environment(\.modelContext) var  modelContex
     @State private var path = [Person]()
     @State private var searchText = ""
     @State private var sortOrder = [SortDescriptor(\Person.name )]
